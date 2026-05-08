@@ -1,0 +1,5 @@
+W01 Assignment: Explain Version Control
+
+What is version control and why is it important?
+
+A version control system is a tool that lets you create versions and manage your work files over time. It allows you to keep track of changes, review them, and revert recent or specific changes if needed. Version control also enables multiple contributors and developers to work on the same project at the same time without conflict. Common tools include GitHub, GitLab, and Bitbucket, which allow developers to upload repositories and securely clone projects. For example, basic Git commands include `git clone <repository>` to copy a project to your local machine, `git add .` to stage all changed files, `git pull` to update your local folders from the remote source, and `git push -u origin <branchname>` to push your changes and enable pull requests. Overall, version control greatly improves productivity and collaboration in software development.
