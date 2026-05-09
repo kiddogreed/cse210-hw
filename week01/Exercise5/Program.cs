@@ -12,7 +12,19 @@ PromptUserName - Asks for and returns the user's name (as a string)
 PromptUserNumber - Asks for and returns the user's favorite number (as an integer)
 SquareNumber - Accepts an integer as a parameter and returns that number squared (as an integer)
 DisplayResult - Accepts the user's name and the squared number and displays them.");
+
+    //forgot to call the functions in the main method, so I added that in here
+        DisplayWelcome();
+        // to store the return values from PromptUserName and PromptUserNumber 
+        string name = PromptUserName();
+        int number = PromptUserNumber();
+        
+        int squaredNumber = SquareNumber(number);
+        // display the result using the DisplayResult function
+        DisplayResult(name, squaredNumber);
     }
+
+
 
     //task 1 DisplayWelcome - Displays the message, ""Welcome to the Program!""
     static void DisplayWelcome()
