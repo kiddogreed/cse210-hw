@@ -1,0 +1,1 @@
+I was able to join group meeting and actively participating in sharing ideas regards the week03 activity.
