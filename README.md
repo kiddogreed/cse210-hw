@@ -108,28 +108,23 @@ What I learned:
 
 ## week03/ScriptureMemorizer
 
-This program helps you memorize a scripture by slowly hiding the words one by one.
+A scripture memorizer game. It shows a verse, then hides random words one by one until everything is blank.
 
-- It shows you the full scripture with its reference (like "John 3:16").
-- Each time you press Enter, it hides a few more random words (shown as underscores).
-- When all the words are hidden, the program ends.
-- If you type "quit" at any time, it exits early.
+Controls: Enter = hide more words | Left Arrow = undo | Q = quit
 
-How it works:
-- The program is split into four files to keep things organized:
-  - `Reference.cs` — Stores the book, chapter, and verse (like "John 3:16" or "Proverbs 3:5-6").
-  - `Word.cs` — Stores each single word and can hide or show it.
-  - `Scripture.cs` — Holds all the words and the reference together, and handles hiding random words.
-  - `Program.cs` — Runs the main loop and ties everything together.
-- Hidden words show as underscores (the same number as letters in the word).
-- The program only hides words that are not already hidden.
-- It checks if all words are hidden to know when to stop.
+Files:
+- `Reference.cs` — holds the book, chapter, and verse
+- `Word.cs` — one word that can be hidden or shown
+- `Scripture.cs` — holds all the words together and handles hiding/revealing
+- `Program.cs` — runs the main loop
+
+Stretch challenge — Left Arrow undo:
+- **Problem:** `Console.ReadLine()` can't detect arrow keys — they just move the cursor. Also, the original hide/show loops could run forever if asked to hide more words than were available.
+- **Fix:** Switched to `Console.ReadKey()` which captures any keypress directly including arrow keys. Rewrote the hide/show methods to pre-build a list of eligible words first, then pick from that list — no duplicates, no infinite loops.
 
 What I learned:
-- How to break a big problem into smaller classes, each doing one job.
-- How to use a list to keep track of many Word objects.
-- How to pick random items from a list.
-- How to loop and check conditions to control when the program ends.
-- How classes work together (Scripture uses Reference and Word inside it).
+- How to split a program into classes that each do one job.
+- The difference between `ReadLine()` (reads typed text) and `ReadKey()` (reads any keypress).
+- How to fix an infinite loop by filtering your options before picking randomly.
 
 

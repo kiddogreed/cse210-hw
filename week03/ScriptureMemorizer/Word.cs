@@ -27,6 +27,12 @@ public class Word
           _isHidden = false;
       }
 
+      // This method lets other classes ask "is this word hidden right now?" without seeing the private field directly.
+      public bool IsHidden()
+      {
+          return _isHidden;
+      }
+
       // This method returns what should be displayed for the word.
       // If the word is hidden, it shows underscores instead of the letters.
       // If not hidden, it shows the actual word.

@@ -3,6 +3,8 @@ public class Scripture
    private Reference _reference; // The scripture reference (like "John 3:16")
     private List<Word> _words; // The list of words in the scripture text
 
+     Random random = new Random();
+
     // Constructor to initialize the scripture with a reference and text.
     public Scripture(Reference reference, string text)
     {
@@ -16,28 +18,50 @@ public class Scripture
       
     }
 
-    public void HideRandomWords(int numbertToHide )
+    public void HideRandomWords(int numberToHide)
     {
-        // This method hides a specified number of random words in the scripture.
-        // It uses a loop to hide words until the desired number is hidden.
-        // It checks to avoid hiding the same word multiple times.\
-        Random random = new Random(); // Create a random number generator
-        int hiddenCount = 0; // Keep track of how many words have been hidden
-        while (hiddenCount < numbertToHide)
+        // Build a list of positions (indexes) for words that are still visible.
+        // This way we never pick the same word twice, and there's no infinite loop.
+        List<int> visibleIndexes = new List<int>();
+        for (int i = 0; i < _words.Count; i++)
         {
-            int index = random.Next(_words.Count); // Get a random index for the words list
-            if (!_words[index].GetDisplayText().Contains('_')) // Check if the word is not already hidden
-            {
-                _words[index].Hide(); // Hide the word at the random index
-                hiddenCount++; // Increment the count of hidden words
-            }
+            if (!_words[i].IsHidden()) // Only include words that are not already hidden
+                visibleIndexes.Add(i);
         }
-     
+
+        // If there aren't enough visible words, just hide whatever is left.
+        int count = Math.Min(numberToHide, visibleIndexes.Count);
+
+        for (int i = 0; i < count; i++)
+        {
+            int pick = random.Next(visibleIndexes.Count); // Pick a random position from the visible list
+            _words[visibleIndexes[pick]].Hide(); // Hide that word
+            visibleIndexes.RemoveAt(pick); // Remove it so we can't pick it again
+        }
     }
 
-    // temporary method to add words to the scripture (for testing purposes)
+    // Stretch challenge: undo hiding by revealing random words that are currently hidden.
+    public void ShowHiddenWords(int numberToShow)
+    {
+        // Build a list of positions (indexes) for words that are currently hidden.
+        // Same safe approach as HideRandomWords — no infinite loop, no duplicate picks.
+        List<int> hiddenIndexes = new List<int>();
+        for (int i = 0; i < _words.Count; i++)
+        {
+            if (_words[i].IsHidden()) // Only include words that are hidden
+                hiddenIndexes.Add(i);
+        }
 
- //For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.
+        // If there aren't enough hidden words, just show whatever is hidden.
+        int count = Math.Min(numberToShow, hiddenIndexes.Count);
+
+        for (int i = 0; i < count; i++)
+        {
+            int pick = random.Next(hiddenIndexes.Count); // Pick a random position from the hidden list
+            _words[hiddenIndexes[pick]].Show(); // Show (un-hide) that word
+            hiddenIndexes.RemoveAt(pick); // Remove it so we can't pick it again
+        }
+    }
    
 
     public string GetDisplayText()
@@ -59,7 +83,7 @@ public class Scripture
         // It returns true if every word is hidden, and false if any word is still visible.
         foreach (Word word in _words)
         {
-            if (!word.GetDisplayText().Contains('_')) // If the word is not hidden
+            if (!word.IsHidden()) // If the word is not hidden
             {
                 return false; // Not completely hidden
             }
