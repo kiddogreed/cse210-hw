@@ -82,6 +82,54 @@ What I learned:
 - How to break a big program into smaller pieces (classes and files).
 - How to keep a list of things (like entries or questions).
 - How to save and load stuff from a file so it’s not lost.
+---
 
+## week03/Fractions
+
+This program creates fractions (like 1/2 or 3/4) and shows them in the terminal.
+
+- You can make a fraction from a whole number (like 5, which becomes 5/1).
+- You can make a fraction from two numbers (like 3 and 4, which becomes 3/4).
+- It shows the fraction as a string (like "3/4").
+- It also shows the decimal value (like 0.75 for 3/4).
+
+How it works:
+- The `Fraction` class stores the top number (numerator) and bottom number (denominator).
+- You can get or set either number using simple methods.
+- The program creates a few test fractions and prints them out to show everything works.
+
+What I learned:
+- How to use a class to represent a math concept (a fraction).
+- How to write multiple constructors so you can create objects in different ways.
+- How to use getter and setter methods to read and change values inside a class.
+- How encapsulation keeps the inside details private while still letting you use the class.
+
+---
+
+## week03/ScriptureMemorizer
+
+This program helps you memorize a scripture by slowly hiding the words one by one.
+
+- It shows you the full scripture with its reference (like "John 3:16").
+- Each time you press Enter, it hides a few more random words (shown as underscores).
+- When all the words are hidden, the program ends.
+- If you type "quit" at any time, it exits early.
+
+How it works:
+- The program is split into four files to keep things organized:
+  - `Reference.cs` — Stores the book, chapter, and verse (like "John 3:16" or "Proverbs 3:5-6").
+  - `Word.cs` — Stores each single word and can hide or show it.
+  - `Scripture.cs` — Holds all the words and the reference together, and handles hiding random words.
+  - `Program.cs` — Runs the main loop and ties everything together.
+- Hidden words show as underscores (the same number as letters in the word).
+- The program only hides words that are not already hidden.
+- It checks if all words are hidden to know when to stop.
+
+What I learned:
+- How to break a big problem into smaller classes, each doing one job.
+- How to use a list to keep track of many Word objects.
+- How to pick random items from a list.
+- How to loop and check conditions to control when the program ends.
+- How classes work together (Scripture uses Reference and Word inside it).
 
 
