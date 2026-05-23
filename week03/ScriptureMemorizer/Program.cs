@@ -17,17 +17,22 @@ class Program
 // When selecting the random words to hide, for the core requirements, you can select any word at random, even if the word was already hidden. (As a stretch challenge, try to randomly select from only those words that are not already hidden.)
 
 // testing values and code
-  string book = "John";
-  int chapter = 3;
-  int verse = 16;
-  int endVerse = 0; // Example of an end verse for a range
+  // string book = "John";       // replaced by ScriptureManager
+  // int chapter = 3;            // replaced by ScriptureManager
+  // int verse = 16;             // replaced by ScriptureManager
+  // int endVerse = 0;           // replaced by ScriptureManager
   Random random = new Random();
   int hideRandom = random.Next(1, 10); // Example of generating a random number between 1 and 10
-  string text = "16 For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."; 
+  // string text = "16 For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."; // replaced by ScriptureManager
 
 // // testing code to create a scripture and display it
-  Reference testScriptureRef = new Reference(book, chapter, verse); // Create a Reference object for "John 3:16"
-  Scripture testScripture = new Scripture(testScriptureRef, text); // Create a Scripture object with the reference and text
+  // Reference testScriptureRef = new Reference(book, chapter, verse); // replaced by ScriptureManager
+  // Scripture testScripture = new Scripture(testScriptureRef, text);  // replaced by ScriptureManager
+
+  // Load a random scripture from file using ScriptureManager (stretch challenge)
+  ScriptureManager manager = new ScriptureManager();
+  manager.LoadFromFile("scripture.txt");
+  Scripture testScripture = manager.GetRandomScripture(random);
 //   Console.WriteLine(testScripture.GetDisplayText()); // Display the scripture text with the reference
 
 //   // testing code to hide random words and display the scripture again
@@ -42,8 +47,8 @@ class Program
 
   //all components are working independently, now I need to connect them together in the main program loop to meet the requirements of the project.
   // add read left arrowkey to undo hiding words (stretch challenge) done
-  // read scripture from a file instead of hardcoding it (stretch challenge) - not  yet
-  // randomly select a scripture from a list of scriptures (stretch challenge)- not  yet
+  // read scripture from a file instead of hardcoding it (stretch challenge) - done
+  // randomly select a scripture from a list of scriptures (stretch challenge) - done
 
 
   //for the main loop

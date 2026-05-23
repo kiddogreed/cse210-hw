@@ -116,15 +116,25 @@ Files:
 - `Reference.cs` — holds the book, chapter, and verse
 - `Word.cs` — one word that can be hidden or shown
 - `Scripture.cs` — holds all the words together and handles hiding/revealing
+- `ScriptureManager.cs` — loads and manages a list of scriptures from a file
 - `Program.cs` — runs the main loop
 
-Stretch challenge — Left Arrow undo:
-- **Problem:** `Console.ReadLine()` can't detect arrow keys — they just move the cursor. Also, the original hide/show loops could run forever if asked to hide more words than were available.
-- **Fix:** Switched to `Console.ReadKey()` which captures any keypress directly including arrow keys. Rewrote the hide/show methods to pre-build a list of eligible words first, then pick from that list — no duplicates, no infinite loops.
+**Latest changes:**
+- Added `scripture.txt` with 20 real scriptures (one per line, pipe-separated format).
+- Created `ScriptureManager` class to load scriptures from the file and pick one at random.
+- The program no longer has a hardcoded scripture — it picks a different one every time it starts.
+
+**Challenges overcome:**
+
+- **Reading from a file:** Needed a clean format the program could parse. Used `Book|Chapter|Verse|Text` so splitting on `|` gives each piece cleanly, even for book names with spaces like `1 John`.
+- **Where to put the file-loading code:** Decided against stuffing it into `Reference`, `Scripture`, or `Word` — none of those are the right place. Created a dedicated `ScriptureManager` class that owns the list and handles loading, adding, and picking a random scripture.
+- **File not found at runtime:** The `.csproj` needed a setting to copy `scripture.txt` into the output folder so the program can find it when it runs.
 
 What I learned:
-- How to split a program into classes that each do one job.
+- How to split a program into classes that each do one job (Single Responsibility).
 - The difference between `ReadLine()` (reads typed text) and `ReadKey()` (reads any keypress).
 - How to fix an infinite loop by filtering your options before picking randomly.
+- How to read and parse a text file into real objects at runtime.
+- How to use a manager/coordinator class to keep file I/O out of model classes.
 
 
