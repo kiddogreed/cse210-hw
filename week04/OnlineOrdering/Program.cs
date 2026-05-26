@@ -9,12 +9,12 @@ class Program
 
 
         // Two sample addresses — one in the USA, one in Canada.
-         Address addr1 = new Address("123 Main St", "New York", "NY", "USA");
-        Address addr2 = new Address("45 Elm Road", "Toronto", "ON", "Canada");
+         Address addr1 = new Address("1729 Evang", "Bangkal", "Makati", "USA");
+        Address addr2 = new Address("Sector 7", "San Carlos", "Caba", "Canada");
 
         // Two customers linked to those addresses.
-        Customer cust1 = new Customer("Alice Johnson", addr1);
-        Customer cust2 = new Customer("Bob Smith", addr2);
+        Customer cust1 = new Customer("Gusion Johnson", addr1);
+        Customer cust2 = new Customer("Bob Hayabusa", addr2);
 
         // Products for order 1: a laptop and two mice.
         List<Product> products1 = new List<Product>
@@ -26,8 +26,8 @@ class Program
         // Products for order 2: a camera, tripod, and three memory cards.
         List<Product> products2 = new List<Product>
         {
-            new Product("Camera", "C303", 450.00m, 1),
-            new Product("Tripod", "D404", 75.00m, 1),
+            new Product("PS6", "C303", 450.00m, 1),
+            new Product("I-MAC", "D404", 75.00m, 1),
             new Product("Memory Card", "E505", 20.00m, 3)
         };
 
