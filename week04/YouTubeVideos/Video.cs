@@ -55,4 +55,18 @@ public class Video
       }
       Console.WriteLine();
   }
+
+  public string DisplayInList(List<Video> videos)
+  {
+      return $"Title: {_title}, Author: {_author}, Length: {length} seconds, Number of comments: {NumberOfComments()}";
+  }
+
+  // Shows every video in the list one by one.
+  public static void DisplayAll(List<Video> videos)
+  {
+      foreach (Video video in videos)
+      {
+          video.DisplayInfo();
+      }
+  }
 }
