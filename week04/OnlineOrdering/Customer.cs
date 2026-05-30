@@ -2,34 +2,34 @@
 public class Customer
 {
     // Full name of the customer (e.g., "Alice Johnson")
-    private string name;
+    private string _name;
 
     // Where the customer lives — links to an Address object.
-    private Address address;
+    private Address _address;
 
     // Sets up a new customer with a name and address.
     public Customer(string name, Address address)
     {
-        this.name = name;
-        this.address = address;
+        this._name = name;
+        this._address = address;
     }
 
     // Returns the customer's name.
     public string GetName()
     {
-        return name;
+        return _name;
     }
 
     // Checks if the customer lives in the USA — affects shipping cost.
     public bool LivesInUSA()
     {
-        return address.IsInUSA();
+        return _address.IsInUSA();
     }
 
     // Returns the customer's full address as a formatted string.
     public string GetAddressString()
     {
-        return address.GetFullAddress();
+        return _address.GetFullAddress();
     }
 
 }

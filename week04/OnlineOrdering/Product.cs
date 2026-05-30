@@ -2,36 +2,36 @@
 public class Product
 {
     // Name of the product (e.g., "Laptop")
-    private string name;
+    private string _name;
 
     // Unique identifier for the product (e.g., "A101")
-    private string productId;
+    private string _productId;
 
     // Price per unit (e.g., 999.99)
-    private decimal price;
+    private decimal _price;
 
     // How many of this product are being ordered.
-    private int quantity;
+    private int _quantity;
 
     // Creates a new product with name, ID, price, and quantity.
     public Product(string name, string productId, decimal price, int quantity)
     {
-        this.name = name;
-        this.productId = productId;
-        this.price = price;
-        this.quantity = quantity;
+        this._name = name;
+        this._productId = productId;
+        this._price = price;
+        this._quantity = quantity;
     }
 
     // Calculates cost for this line item: price × quantity.
     public decimal GetTotalCost()
     {
-        return price * quantity;
+        return _price * _quantity;
     }
 
     // Returns a short label used on the packing slip (name + product ID).
     public string GetPackingLabel()
     {
-        return $"{name} (ID: {productId})";
+        return $"{_name} (ID: {_productId})";
     }
 
 }

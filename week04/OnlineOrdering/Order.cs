@@ -2,16 +2,16 @@
 public class Order
 {
     // All the products included in this order.
-    private List<Product> products;
+    private List<Product> _products;
 
     // Who placed this order.
-    private Customer customer;
+    private Customer _customer;
 
     // Creates an order for a given customer and their list of products.
     public Order(Customer customer, List<Product> products)
     {
-        this.customer = customer;
-        this.products = products;
+        this._customer = customer;
+        this._products = products;
     }
 
     // Adds up the cost of every product, then adds shipping.
@@ -19,12 +19,12 @@ public class Order
     public decimal CalculateTotalCost()
     {
         decimal total = 0;
-        foreach (Product p in products)
+        foreach (Product p in _products)
         {
             total += p.GetTotalCost();
         }
 
-        decimal shippingCost = customer.LivesInUSA() ? 5 : 35;
+        decimal shippingCost = _customer.LivesInUSA() ? 5 : 35;
         return total + shippingCost;
     }
 
@@ -32,7 +32,7 @@ public class Order
     public string GetPackingLabel()
     {
         string label = "Packing Label:\n";
-        foreach (Product p in products)
+        foreach (Product p in _products)
         {
             label += "- " + p.GetPackingLabel() + "\n";
         }
@@ -42,7 +42,7 @@ public class Order
     // Builds a shipping label with the customer's name and full mailing address.
     public string GetShippingLabel()
     {
-        return $"Shipping Label:\n{customer.GetName()}\n{customer.GetAddressString()}";
+        return $"Shipping Label:\n{_customer.GetName()}\n{_customer.GetAddressString()}";
     }
 
 }
