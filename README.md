@@ -137,4 +137,19 @@ What I learned:
 - How to read and parse a text file into real objects at runtime.
 - How to use a manager/coordinator class to keep file I/O out of model classes.
 
+---
+
+## week05/Homework
+
+This homework project uses inheritance to build different kinds of assignments.
+
+- `Assignment.cs` stores the shared student name and topic.
+- `MathAssignment.cs` inherits from `Assignment` and adds the textbook section and problems.
+- `WritingAssignment.cs` also inherits from `Assignment` and adds a title.
+
+What I learned:
+- How inheritance lets one class reuse another class's code.
+- How a base class can hold shared data for multiple assignment types.
+- How child classes can add their own extra details while still using the base class.
+
 
