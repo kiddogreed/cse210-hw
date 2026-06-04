@@ -152,4 +152,25 @@ What I learned:
 - How a base class can hold shared data for multiple assignment types.
 - How child classes can add their own extra details while still using the base class.
 
+## week05/Mindfulness
+
+This project is a simple mindfulness app with three activities:
+- Breathing activity
+- Listing activity
+- Reflecting activity
+
+How inheritance is used:
+- `Activity` holds the shared parts like the name, description, timer, spinner, and countdown.
+- `BreathingActivity`, `ListingActivity`, and `ReflectingActivity` inherit from `Activity`.
+- Each child class adds its own `Run()` method and activity-specific steps.
+
+Issue I overcame:
+- The base `Activity` class did not match the child classes at first, so I added a shared constructor and made the activity classes call it correctly.
+- After that, the project built and the menu could run each activity.
+
+What I learned:
+- How inheritance helps reduce repeated code.
+- How one base class can support several different activities.
+- How to fix constructor problems when a child class depends on a parent class.
+
 
