@@ -52,3 +52,5 @@ public class JohnDomingo : Domingo
 JohnDomingo john = new JohnDomingo("John");
 john.ILoveBasketball();
 ```
+
+By implementing Inheritance we can now avoid repeating attributes or behavior per class. Basically we can reuse them.
