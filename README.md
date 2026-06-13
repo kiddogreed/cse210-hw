@@ -193,4 +193,59 @@ What I learned:
 - Overriding lets each child class replace a parent method with its own behavior.
 - A `List<Shape>` is useful because it lets one loop work with different objects in the same way.
 
+---
+
+## week06/EternalQuest
+
+A goal-tracking program that uses gamification to keep you motivated. You can create different kinds of goals, record progress, earn points, and save everything to a file so nothing is lost between sessions.
+
+### How it works
+
+The program has three goal types, each in its own file:
+
+- `SimpleGoal` — done once and marked complete (e.g., run a marathon, earn 1000 points).
+- `EternalGoal` — repeats forever, every time you record it you earn points (e.g., read scriptures daily).
+- `ChecklistGoal` — must be done a set number of times; you earn regular points each time and a bonus when you hit the target (e.g., attend the temple 10 times).
+
+`GoalManager` owns the list of goals and the player's running score. `Program.cs` drives the interactive menu.
+
+### How I applied polymorphism
+
+All three goal types inherit from one base class called `Goal`. The base class defines three `virtual` methods:
+
+- `RecordEvent()` — awards points; each child overrides it with its own rules.
+- `IsComplete()` — returns whether the goal is done; each child decides its own logic.
+- `GetDisplayString()` — returns the one-line display text shown in the goal list, with `[ ]` or `[X]` status and any extra detail like `Completed 2/5 times`.
+
+Because these are `virtual`/`override`, `GoalManager` can hold a `List<Goal>` containing any mix of goal types, call `RecordEvent()` on whichever one the player picks, and C# automatically runs the right version for that object — without needing to check the type manually. That is polymorphism in action.
+
+### Challenges I overcame
+
+- **`RecordEvent()` was `void`** — the score was never actually added. Fixed by making `RecordEvent()` return `int` (the points earned), and having `GoalManager.RecordEvent()` add that return value to the score.
+- **`IsComplete()` was hiding, not overriding** — derived classes declared `public bool IsComplete()` without `override`, so the base version was always called through a `Goal` reference. Fixed by making the base method `virtual` and all derived versions `override`.
+- **`LoadGoals` had wrong field indices** — `ChecklistGoal` was reading `amountCompleted` and `target` from the wrong positions in the pipe-separated line. Fixed by mapping each `parts[n]` to the correct field name.
+- **`SimpleGoal` load didn't restore `_isComplete`** — completed goals would reset to incomplete after loading. Fixed by adding a second constructor that accepts the saved `bool` value.
+- **`Program.cs` was empty** — the whole user interface was missing. Built a full interactive menu covering all nine functional requirements: create goals, list goals, record events, display score, and save/load.
+
+### How I exceeded the requirements
+
+I added a **level progression system** inside `GoalManager.GetLevel()`. As the player earns points they advance through five named levels:
+
+| Score | Level Title |
+|---|---|
+| 0 | Novice Seeker |
+| 500+ | Rising Seeker |
+| 2000+ | Faithful Adventurer |
+| 5000+ | Celestial Champion |
+| 10000+ | Eternal Master |
+
+The current level title is shown next to the score at the top of every menu loop, so the player always knows how far they have come. This is described in the comment block at the top of `Program.cs`.
+
+### What I learned
+
+- Polymorphism lets one list hold many different object types and still call the right method on each one.
+- `virtual` + `override` is what makes polymorphism actually work — using `new` hides the method instead and breaks it when accessed through a base class reference.
+- Returning a value from a method (instead of `void`) is important when the caller needs to use the result, like adding earned points to a score.
+- Load constructors are needed when an object has state that must be fully restored from a file, not just initialized fresh.
+
 
