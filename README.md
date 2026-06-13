@@ -229,7 +229,7 @@ Because these are `virtual`/`override`, `GoalManager` can hold a `List<Goal>` co
 
 ### How I exceeded the requirements
 
-I added a **level progression system** inside `GoalManager.GetLevel()`. As the player earns points they advance through five named levels:
+**1. Level progression system** — inside `GoalManager.GetLevel()`, as the player earns points they advance through five named levels:
 
 | Score | Level Title |
 |---|---|
@@ -239,7 +239,24 @@ I added a **level progression system** inside `GoalManager.GetLevel()`. As the p
 | 5000+ | Celestial Champion |
 | 10000+ | Eternal Master |
 
-The current level title is shown next to the score at the top of every menu loop, so the player always knows how far they have come. This is described in the comment block at the top of `Program.cs`.
+The current level title is shown next to the score at the top of every menu loop.
+
+**2. DateTime tracker** — every goal records the exact date and time it was last worked on. This timestamp is stored in the base `Goal` class as a `DateTime?` (nullable, so goals that have never been recorded show `"Never recorded"` instead of a date). Each child class calls `SetLastRecorded()` inside `RecordEvent()` when points are awarded. The date is shown in the goal list next to each entry, and saved/loaded from the file so it persists between sessions.
+
+Example goal list output:
+```
+[ ] Read Scriptures (Daily scripture study)  |  Last: 2026-06-13 09:45
+[X] Run Marathon (Complete a full marathon)   |  Last: 2026-06-12 07:30
+[ ] Temple Attendance (Go 10 times) -- Completed 3/10 times  |  Never recorded
+```
+
+Both features are described in the comment block at the top of `Program.cs`.
+
+### Challenges I overcame (continued)
+
+- **Saving and loading the datetime** — added a `lastRecorded` field to the pipe-separated save format between `points` and the goal-specific fields. This shifted the index of every field that came after it in `ChecklistGoal`, so the load code had to be updated carefully.
+- **Parsing the date back from a string** — used `DateTime.ParseExact` with `CultureInfo.InvariantCulture` and a fixed format `"yyyy-MM-dd HH:mm:ss"` so the save file always reads correctly regardless of the computer's locale settings.
+- **Nullable DateTime** — used `DateTime?` (a nullable type) so goals that have never been recorded can store `null` instead of a fake default date. Checking `.HasValue` before using the date avoids errors.
 
 ### What I learned
 
@@ -247,5 +264,7 @@ The current level title is shown next to the score at the top of every menu loop
 - `virtual` + `override` is what makes polymorphism actually work — using `new` hides the method instead and breaks it when accessed through a base class reference.
 - Returning a value from a method (instead of `void`) is important when the caller needs to use the result, like adding earned points to a score.
 - Load constructors are needed when an object has state that must be fully restored from a file, not just initialized fresh.
+- Nullable types (`DateTime?`) let a field represent "not set yet" cleanly, without needing a magic default value like `DateTime.MinValue`.
+- Always use a fixed format and `InvariantCulture` when saving and loading dates to a file, so the file works the same on every machine.
 
 

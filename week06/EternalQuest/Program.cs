@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 // =============================================================
 // Eternal Quest — Week 06 EternalQuest Project
@@ -61,12 +62,12 @@ class Program
                 case "4":
                     // FR9 — save goals and score to a file.
                     Console.Write("Filename to save: ");
-                    manager.SaveGoals(Console.ReadLine());
+                    manager.SaveGoals(GetGoalPath(Console.ReadLine()));
                     break;
                 case "5":
                     // FR9 — load goals and score from a file.
                     Console.Write("Filename to load: ");
-                    manager.LoadGoals(Console.ReadLine());
+                    manager.LoadGoals(GetGoalPath(Console.ReadLine()));
                     break;
                 case "6":
                     running = false;
@@ -141,5 +142,17 @@ class Program
         {
             Console.WriteLine("Invalid input.");
         }
+    }
+
+    // Uses the EternalQuest folder as the default save/load location when the user presses Enter.
+    static string GetGoalPath(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            // Build an absolute path to week06\EternalQuest\goals.txt no matter where the app is started from.
+            return Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "goals.txt"));
+        }
+
+        return input;
     }
 }

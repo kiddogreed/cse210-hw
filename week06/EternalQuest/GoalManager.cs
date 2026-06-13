@@ -67,6 +67,7 @@ public class GoalManager
   // Writes the score and all goals to a text file so progress is not lost.
   public void SaveGoals(string filename)
   {
+    
       using (StreamWriter writer = new StreamWriter(filename))
       {
           writer.WriteLine(_score);
