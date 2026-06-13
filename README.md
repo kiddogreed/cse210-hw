@@ -173,4 +173,24 @@ What I learned:
 - How one base class can support several different activities.
 - How to fix constructor problems when a child class depends on a parent class.
 
+## week06/Shapes
+
+This project practices polymorphism using different kinds of shapes.
+
+- `Shape` is the parent class that stores the color and defines `GetArea()`.
+- `Square`, `Rectangle`, and `Circle` inherit from `Shape`.
+- Each child class has its own area formula, but they all use the same method name: `GetArea()`.
+
+How polymorphism works here:
+- A `List<Shape>` can hold a square, rectangle, and circle together.
+- When the program loops through the list, it calls `GetArea()` on each item.
+- C# automatically uses the correct version of `GetArea()` based on the real object type.
+- In simple terms: the program can treat them all like "shapes," while each one still does its own specific job.
+
+What I learned:
+- Inheritance is for sharing common parts, like color.
+- Polymorphism means one base type can work with many child types.
+- Overriding lets each child class replace a parent method with its own behavior.
+- A `List<Shape>` is useful because it lets one loop work with different objects in the same way.
+
 
