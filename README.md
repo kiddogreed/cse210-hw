@@ -219,6 +219,32 @@ All three goal types inherit from one base class called `Goal`. The base class d
 
 Because these are `virtual`/`override`, `GoalManager` can hold a `List<Goal>` containing any mix of goal types, call `RecordEvent()` on whichever one the player picks, and C# automatically runs the right version for that object — without needing to check the type manually. That is polymorphism in action.
 
+---
+
+## week07/ExerciseTracking
+
+This project is a small exercise tracker for three kinds of activities:
+- Running
+- Cycling
+- Swimming
+
+Each activity stores the date and the number of minutes. Then each activity has its own special value:
+- Running stores distance
+- Cycling stores speed
+- Swimming stores laps
+
+How polymorphism is used:
+- `Activity` is the base class with the shared data and the shared `GetSummary()` method.
+- `RunningActivity`, `CyclingActivity`, and `SwimmingActivity` inherit from `Activity`.
+- Each child class overrides `GetDistance()`, `GetSpeed()`, and `GetPace()` with its own formula.
+- `Program.cs` puts all three objects in one `List<Activity>` and prints each summary in one loop.
+
+What I learned:
+- How to use one parent class to hold shared values.
+- How overriding lets each child class calculate things in a different way.
+- How polymorphism lets one list hold different object types.
+- How encapsulation keeps member variables private while methods control the calculations.
+
 ### Challenges I overcame
 
 - **`RecordEvent()` was `void`** — the score was never actually added. Fixed by making `RecordEvent()` return `int` (the points earned), and having `GoalManager.RecordEvent()` add that return value to the score.
